@@ -5,35 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuroAssist UCAB - Oficial</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; text-align: center; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin: 50px auto; max-width: 400px; border-top: 5px solid #F2AD43; }
-        .btn-reserva { background: #004664; color: white; padding: 15px 25px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
-        #chat-container { position: fixed; bottom: 20px; right: 20px; width: 300px; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: none; flex-direction: column; text-align: left; border: 1px solid #004664; }
-        #chat-header { background: #004664; color: white; padding: 10px; border-radius: 10px 10px 0 0; font-size: 14px; font-weight: bold; }
-        #chat-body { padding: 15px; height: 250px; overflow-y: auto; font-size: 13px; }
-        .bot-msg { background: #eef2f3; padding: 8px; border-radius: 5px; margin-bottom: 10px; }
-        .opcion-btn { display: block; width: 100%; background: #F2AD43; border: none; color: #004664; padding: 8px; margin-bottom: 5px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px; }
-        #chat-trigger { position: fixed; bottom: 20px; right: 20px; background: #F2AD43; color: #004664; border: none; padding: 15px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); max-width: 450px; width: 90%; text-align: center; border-top: 8px solid #F2AD43; }
+        .logo { width: 120px; margin-bottom: 20px; }
+        h1 { color: #004664; margin-bottom: 10px; font-size: 24px; }
+        p { color: #555; line-height: 1.6; margin-bottom: 25px; }
+        .btn-reserva { background: #004664; color: white; padding: 18px 30px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; transition: background 0.3s; font-size: 16px; }
+        .btn-reserva:hover { background: #002d40; }
+        
+        /* Estilos del Asistente */
+        #chat-trigger { position: fixed; bottom: 25px; right: 25px; background: #F2AD43; color: #004664; border: none; padding: 15px 22px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 15px; display: flex; align-items: center; gap: 10px; z-index: 9999; }
+        #chat-container { position: fixed; bottom: 90px; right: 25px; width: 320px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; flex-direction: column; border: 1px solid #ddd; z-index: 9999; overflow: hidden; }
+        #chat-header { background: #004664; color: white; padding: 15px; font-weight: bold; font-size: 15px; }
+        #chat-body { padding: 15px; height: 300px; overflow-y: auto; font-size: 14px; background: #f9f9f9; }
+        .bot-msg { background: #fff; padding: 10px; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); color: #333; border-left: 4px solid #F2AD43; }
+        .opcion-btn { display: block; width: 100%; background: white; border: 1.5px solid #004664; color: #004664; padding: 10px; margin-bottom: 8px; border-radius: 8px; cursor: pointer; font-weight: 600; text-align: left; transition: all 0.2s; }
+        .opcion-btn:hover { background: #eef2f3; transform: translateX(5px); }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <img src="https://w7.pngwing.com/pngs/895/733/png-transparent-andres-bello-catholic-university-ucab-guayana-university-student-student-blue-text-logo.png" alt="UCAB" style="width: 100px; margin-bottom: 10px;">
-        <h2 style="color: #004664;">NeuroAssist UCAB</h2>
-        <p>Sistema de Gestión y Asesoría Técnica</p>
-        <a href="https://script.google.com/macros/s/AKfycbx6s2PQ6VwSSJvK28NLml_ZnuuZXRhQWH_Vtp-qZXIH17kLJ2Ftwgg3BiZ74ht8WoHT/exec" class="btn-reserva">IR A RESERVAR LABORATORIO</a>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Logo_UCAB.png" alt="UCAB Logo" class="logo">
+        <h1>NeuroAssist UCAB</h1>
+        <p>Bienvenido al Ecosistema de Gestión del Laboratorio de Investigación Conductual.</p>
+        <a href="https://script.google.com/macros/s/AKfycbx6s2PQ6VwSSJvK28NLml_ZnuuZXRhQWH_Vtp-qZXIH17kLJ2Ftwgg3BiZ74ht8WoHT/exec" class="btn-reserva">RESERVAR LABORATORIO</a>
     </div>
 
-    <button id="chat-trigger" onclick="toggleChat()">🤖 Consultar Protocolos</button>
+    <button id="chat-trigger" onclick="toggleChat()">🤖 Consultar Asistente</button>
 
     <div id="chat-container">
-        <div id="chat-header">Asistente Técnico UCAB</div>
-        <div id="chat-body">
-            <div class="bot-msg">¡Hola! Soy NeuroAssist. Selecciona una duda frecuente basada en nuestros protocolos oficiales:</div>
-            <button class="opcion-btn" onclick="responder('lentes')">¿Uso de lentes?</button>
-            <button class="opcion-btn" onclick="responder('rdc')">Requisitos Remotos (RDC)</button>
-            <button class="opcion-btn" onclick="responder('baseline')">¿Qué es el Baseline?</button>
-            <button class="opcion-btn" onclick="responder('contacto')">Contacto del Lab</button>
+        <div id="chat-header">NeuroAssist - Protocolos Lab</div>
+        <div id="chat-body" id="chatContent">
+            <div class="bot-msg">¡Hola! Soy tu asistente técnico. ¿En qué protocolo tienes dudas hoy?</div>
+            <button class="opcion-btn" onclick="responder('lentes')">👓 ¿Uso de lentes?</button>
+            <button class="opcion-btn" onclick="responder('rdc')">💻 Requisitos Remotos (RDC)</button>
+            <button class="opcion-btn" onclick="responder('baseline')">📈 ¿Qué es el Baseline?</button>
+            <button class="opcion-btn" onclick="responder('shimmer')">⚡ ¿GSR / Shimmer?</button>
         </div>
     </div>
 
@@ -42,16 +50,20 @@
             var chat = document.getElementById('chat-container');
             chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
         }
+
         function responder(tipo) {
             var body = document.getElementById('chat-body');
             var msg = "";
-            if(tipo === 'lentes') msg = "<b>Protocolo:</b> Si usa lentes con antirreflejo, se recomienda removerlos. Evita interferencias con el Eye Tracking.";
-            if(tipo === 'rdc') msg = "<b>Requisitos RDC:</b> Cámara mín. 720p, Navegador Chrome/Edge/Safari. Conexión mín. 5 Mbps.";
-            if(tipo === 'baseline') msg = "<b>Baseline:</b> Es el nivel inicial del organismo. Se mide ANTES del estímulo para detectar cambios biométricos.";
-            if(tipo === 'contacto') msg = "Escribe a: <b>investigacionconductual@ucab.edu.ve</b>";
-            body.innerHTML += "<div class='bot-msg' style='background:#d1e7dd'>" + msg + "</div>";
+            
+            if(tipo === 'lentes') msg = "<b>Lentes:</b> Evita lentes con antirreflejo grueso. Si el participante puede ver sin ellos, es mejor removerlos para asegurar que el Eye Tracker no pierda el pupila.";
+            if(tipo === 'rdc') msg = "<b>RDC:</b> Cámara 720p mínimo, conexión de 5Mbps. Solo usar Chrome, Firefox o Safari. ¡No usar Internet Explorer!";
+            if(tipo === 'baseline') msg = "<b>Baseline:</b> Es vital. Mide el estado en reposo por 60 segundos ANTES de mostrar el estímulo para tener un punto de comparación real.";
+            if(tipo === 'shimmer') msg = "<b>GSR:</b> Colocar electrodos en dedos índice y medio. Asegurar que la piel esté limpia para medir la respuesta galvánica correctamente.";
+            
+            body.innerHTML += "<div class='bot-msg' style='background:#e7f3f9; border-left: 4px solid #004664;'>" + msg + "</div>";
             body.scrollTop = body.scrollHeight;
         }
     </script>
+
 </body>
 </html>
