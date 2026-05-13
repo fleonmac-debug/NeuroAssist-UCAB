@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroAssist UCAB - Oficial</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; text-align: center; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin: 50px auto; max-width: 400px; border-top: 5px solid #F2AD43; }
+        .btn-reserva { background: #004664; color: white; padding: 15px 25px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
+        #chat-container { position: fixed; bottom: 20px; right: 20px; width: 300px; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: none; flex-direction: column; text-align: left; border: 1px solid #004664; }
+        #chat-header { background: #004664; color: white; padding: 10px; border-radius: 10px 10px 0 0; font-size: 14px; font-weight: bold; }
+        #chat-body { padding: 15px; height: 250px; overflow-y: auto; font-size: 13px; }
+        .bot-msg { background: #eef2f3; padding: 8px; border-radius: 5px; margin-bottom: 10px; }
+        .opcion-btn { display: block; width: 100%; background: #F2AD43; border: none; color: #004664; padding: 8px; margin-bottom: 5px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px; }
+        #chat-trigger { position: fixed; bottom: 20px; right: 20px; background: #F2AD43; color: #004664; border: none; padding: 15px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="https://w7.pngwing.com/pngs/895/733/png-transparent-andres-bello-catholic-university-ucab-guayana-university-student-student-blue-text-logo.png" alt="UCAB" style="width: 100px; margin-bottom: 10px;">
+        <h2 style="color: #004664;">NeuroAssist UCAB</h2>
+        <p>Sistema de Gestión y Asesoría Técnica</p>
+        <a href="https://script.google.com/macros/s/AKfycbx6s2PQ6VwSSJvK28NLml_ZnuuZXRhQWH_Vtp-qZXIH17kLJ2Ftwgg3BiZ74ht8WoHT/exec" class="btn-reserva">IR A RESERVAR LABORATORIO</a>
+    </div>
+
+    <button id="chat-trigger" onclick="toggleChat()">🤖 Consultar Protocolos</button>
+
+    <div id="chat-container">
+        <div id="chat-header">Asistente Técnico UCAB</div>
+        <div id="chat-body">
+            <div class="bot-msg">¡Hola! Soy NeuroAssist. Selecciona una duda frecuente basada en nuestros protocolos oficiales:</div>
+            <button class="opcion-btn" onclick="responder('lentes')">¿Uso de lentes?</button>
+            <button class="opcion-btn" onclick="responder('rdc')">Requisitos Remotos (RDC)</button>
+            <button class="opcion-btn" onclick="responder('baseline')">¿Qué es el Baseline?</button>
+            <button class="opcion-btn" onclick="responder('contacto')">Contacto del Lab</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            var chat = document.getElementById('chat-container');
+            chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+        }
+        function responder(tipo) {
+            var body = document.getElementById('chat-body');
+            var msg = "";
+            if(tipo === 'lentes') msg = "<b>Protocolo:</b> Si usa lentes con antirreflejo, se recomienda removerlos. Evita interferencias con el Eye Tracking.";
+            if(tipo === 'rdc') msg = "<b>Requisitos RDC:</b> Cámara mín. 720p, Navegador Chrome/Edge/Safari. Conexión mín. 5 Mbps.";
+            if(tipo === 'baseline') msg = "<b>Baseline:</b> Es el nivel inicial del organismo. Se mide ANTES del estímulo para detectar cambios biométricos.";
+            if(tipo === 'contacto') msg = "Escribe a: <b>investigacionconductual@ucab.edu.ve</b>";
+            body.innerHTML += "<div class='bot-msg' style='background:#d1e7dd'>" + msg + "</div>";
+            body.scrollTop = body.scrollHeight;
+        }
+    </script>
+</body>
+</html>
