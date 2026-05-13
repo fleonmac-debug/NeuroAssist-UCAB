@@ -3,67 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroAssist UCAB - Oficial</title>
+    <title>NeuroAssist - Asistente Virtual UCAB</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); max-width: 450px; width: 90%; text-align: center; border-top: 8px solid #F2AD43; }
-        .logo { width: 120px; margin-bottom: 20px; }
-        h1 { color: #004664; margin-bottom: 10px; font-size: 24px; }
-        p { color: #555; line-height: 1.6; margin-bottom: 25px; }
-        .btn-reserva { background: #004664; color: white; padding: 18px 30px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; transition: background 0.3s; font-size: 16px; }
-        .btn-reserva:hover { background: #002d40; }
+        body { font-family: 'Arial', sans-serif; background-color: #004664; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; color: white; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .logo-ucab { width: 200px; filter: brightness(0) invert(1); } /* Logo arreglado */
         
-        /* Estilos del Asistente */
-        #chat-trigger { position: fixed; bottom: 25px; right: 25px; background: #F2AD43; color: #004664; border: none; padding: 15px 22px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 15px; display: flex; align-items: center; gap: 10px; z-index: 9999; }
-        #chat-container { position: fixed; bottom: 90px; right: 25px; width: 320px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; flex-direction: column; border: 1px solid #ddd; z-index: 9999; overflow: hidden; }
-        #chat-header { background: #004664; color: white; padding: 15px; font-weight: bold; font-size: 15px; }
-        #chat-body { padding: 15px; height: 300px; overflow-y: auto; font-size: 14px; background: #f9f9f9; }
-        .bot-msg { background: #fff; padding: 10px; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); color: #333; border-left: 4px solid #F2AD43; }
-        .opcion-btn { display: block; width: 100%; background: white; border: 1.5px solid #004664; color: #004664; padding: 10px; margin-bottom: 8px; border-radius: 8px; cursor: pointer; font-weight: 600; text-align: left; transition: all 0.2s; }
-        .opcion-btn:hover { background: #eef2f3; transform: translateX(5px); }
+        /* Contenedor del ASISTENTE VIRTUAL */
+        .asistente-box { background: white; width: 90%; max-width: 500px; height: 500px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; color: #333; }
+        .chat-header { background: #F2AD43; color: #004664; padding: 20px; font-weight: bold; text-align: center; font-size: 1.2em; border-bottom: 2px solid #d49632; }
+        .chat-content { flex: 1; padding: 20px; overflow-y: auto; background: #f4f7f6; }
+        .bot-msg { background: #e7f3f9; padding: 15px; border-radius: 15px; margin-bottom: 15px; border-left: 5px solid #004664; line-height: 1.4; }
+        .user-options { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: white; }
+        .opt-btn { background: #004664; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 0.9em; transition: 0.3s; }
+        .opt-btn:hover { background: #F2AD43; color: #004664; }
+        .footer-link { margin-top: 20px; color: #aaa; text-decoration: none; font-size: 0.8em; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Logo_UCAB.png" alt="UCAB Logo" class="logo">
-        <h1>NeuroAssist UCAB</h1>
-        <p>Bienvenido al Ecosistema de Gestión del Laboratorio de Investigación Conductual.</p>
-        <a href="https://script.google.com/macros/s/AKfycbx6s2PQ6VwSSJvK28NLml_ZnuuZXRhQWH_Vtp-qZXIH17kLJ2Ftwgg3BiZ74ht8WoHT/exec" class="btn-reserva">RESERVAR LABORATORIO</a>
+    <div class="header">
+        <img src="https://moodle.ucab.edu.ve/theme/image.php/boost/theme/1715112108/logo_ucab_blanco" class="logo-ucab" alt="UCAB">
+        <h1>NeuroAssist: Asistente Técnico</h1>
+        <p>Consulta protocolos y procedimientos del Laboratorio</p>
     </div>
 
-    <button id="chat-trigger" onclick="toggleChat()">🤖 Consultar Asistente</button>
-
-    <div id="chat-container">
-        <div id="chat-header">NeuroAssist - Protocolos Lab</div>
-        <div id="chat-body" id="chatContent">
-            <div class="bot-msg">¡Hola! Soy tu asistente técnico. ¿En qué protocolo tienes dudas hoy?</div>
-            <button class="opcion-btn" onclick="responder('lentes')">👓 ¿Uso de lentes?</button>
-            <button class="opcion-btn" onclick="responder('rdc')">💻 Requisitos Remotos (RDC)</button>
-            <button class="opcion-btn" onclick="responder('baseline')">📈 ¿Qué es el Baseline?</button>
-            <button class="opcion-btn" onclick="responder('shimmer')">⚡ ¿GSR / Shimmer?</button>
+    <div class="asistente-box">
+        <div class="chat-header">🤖 Interfaz de Consulta Inteligente</div>
+        <div class="chat-content" id="chat">
+            <div class="bot-msg">
+                <b>¡Hola! Soy NeuroAssist.</b><br>
+                He analizado tus documentos de protocolos. ¿En qué puedo ayudarte hoy?
+            </div>
+        </div>
+        <div class="user-options">
+            <button class="opt-btn" onclick="ask('lentes')">Protocolo Lentes</button>
+            <button class="opt-btn" onclick="ask('rdc')">Requisitos RDC</button>
+            <button class="opt-btn" onclick="ask('baseline')">Importancia Baseline</button>
+            <button class="opt-btn" onclick="ask('emotiv')">Uso de Emotiv EEG</button>
         </div>
     </div>
 
-    <script>
-        function toggleChat() {
-            var chat = document.getElementById('chat-container');
-            chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
-        }
+    <a href="https://script.google.com/macros/s/AKfycbx6s2PQ6VwSSJvK28NLml_ZnuuZXRhQWH_Vtp-qZXIH17kLJ2Ftwgg3BiZ74ht8WoHT/exec" class="footer-link">Acceder al Sistema de Reservas →</a>
 
-        function responder(tipo) {
-            var body = document.getElementById('chat-body');
-            var msg = "";
+    <script>
+        function ask(topic) {
+            const chat = document.getElementById('chat');
+            let res = "";
+            if(topic==='lentes') res = "<b>Según el protocolo:</b> El uso de lentes con antirreflejo grueso dificulta la captura del Eye Tracker. Se recomienda que si el sujeto tiene una visión aceptable sin ellos, se los retire. Si no, se debe recalibrar hasta obtener un error menor a 0.5 grados.";
+            if(topic==='rdc') res = "<b>Requisitos para Estudios Remotos:</b> Es obligatorio usar Chrome o Safari. La cámara debe ser de 720p y el sujeto debe estar en un ambiente iluminado de frente, nunca con luz de respaldo.";
+            if(topic==='baseline') res = "<b>El Baseline es obligatorio:</b> Debes registrar 60 segundos de actividad en reposo antes de cualquier estímulo para poder normalizar los datos de GSR y Ritmo Cardíaco.";
+            if(topic==='emotiv') res = "<b>Uso de Emotiv EEG:</b> Asegúrate de hidratar los sensores con solución salina. La conexión debe mostrar todos los nodos en verde en el software antes de empezar la grabación.";
             
-            if(tipo === 'lentes') msg = "<b>Lentes:</b> Evita lentes con antirreflejo grueso. Si el participante puede ver sin ellos, es mejor removerlos para asegurar que el Eye Tracker no pierda el pupila.";
-            if(tipo === 'rdc') msg = "<b>RDC:</b> Cámara 720p mínimo, conexión de 5Mbps. Solo usar Chrome, Firefox o Safari. ¡No usar Internet Explorer!";
-            if(tipo === 'baseline') msg = "<b>Baseline:</b> Es vital. Mide el estado en reposo por 60 segundos ANTES de mostrar el estímulo para tener un punto de comparación real.";
-            if(tipo === 'shimmer') msg = "<b>GSR:</b> Colocar electrodos en dedos índice y medio. Asegurar que la piel esté limpia para medir la respuesta galvánica correctamente.";
-            
-            body.innerHTML += "<div class='bot-msg' style='background:#e7f3f9; border-left: 4px solid #004664;'>" + msg + "</div>";
-            body.scrollTop = body.scrollHeight;
+            chat.innerHTML += `<div class="bot-msg">${res}</div>`;
+            chat.scrollTop = chat.scrollHeight;
         }
     </script>
-
 </body>
 </html>
